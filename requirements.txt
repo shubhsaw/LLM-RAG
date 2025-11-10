@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg2-binary
+python-multipart
+langchain
+faiss-cpu
+PyPDF2
+python-pptx
+tiktoken
+requests
+python-dotenv
+sentence-transformers
