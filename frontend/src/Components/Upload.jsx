@@ -82,53 +82,54 @@ export default function Upload({ onUploadSuccess }) {
     setStatus("");
   }
 
-  return (
-    <div className="upload-container">
-      <form onSubmit={handleUpload} className="upload-form">
-        <div className="file-input-wrapper">
-          <input 
-            id="file-input"
-            type="file" 
-            accept=".pdf,.pptx,.ppt" 
-            onChange={handleFileChange}
-            disabled={loading}
-            className="file-input"
-          />
-          <label htmlFor="file-input" className="file-label">
-            {file ? `📄 ${file.name}` : "Choose file..."}
-          </label>
-        </div>
-        
-        <button 
-          type="submit" 
-          disabled={!file || loading}
-          className="upload-button"
-        >
-          {loading ? "⏳ Processing..." : "📤 Upload"}
-        </button>
-      </form>
+return (
+  <div className="upload-container">
 
-      {status && <div className="status-message success">{status}</div>}
-      {error && <div className="status-message error">{error}</div>}
+    <form onSubmit={handleUpload} className="upload-form">
+      <div className="file-input-wrapper">
+        <input 
+          id="file-input"
+          type="file" 
+          accept=".pdf,.pptx,.ppt" 
+          onChange={handleFileChange}
+          disabled={loading}
+          className="file-input"
+        />
+        <label htmlFor="file-input" className="file-label">
+          {file ? `📄 ${file.name}` : "Choose file"}
+        </label>
+      </div>
+      
+      <button 
+        type="submit" 
+        disabled={!file || loading}
+        className="upload-button"
+      >
+        {loading ? "⏳ Processing..." : "Upload"}
+      </button>
+    </form>
 
-      {files.length > 0 && (
-        <div className="files-list">
-          <h4>📁 Uploaded Documents ({files.length})</h4>
-          <div className="files-items">
-            {files.map((f) => (
-              <div key={f.id} className="file-item">
-                <div className="file-icon">📄</div>
-                <div className="file-info">
-                  <div className="file-name">{f.filename}</div>
-                  <div className="file-meta">
-                    {f.num_chunks} chunks • {new Date(f.uploaded_at).toLocaleDateString()}
-                  </div>
+    {status && <div className="status-message success">{status}</div>}
+    {error && <div className="status-message error">{error}</div>}
+
+    {files.length > 0 && (
+      <div className="files-list">
+        <h4>Uploaded ({files.length})</h4>
+        <div className="files-items">
+          {files.map((f) => (
+            <div key={f.id} className="file-item">
+              <div className="file-icon">📄</div>
+              <div className="file-info">
+                <div className="file-name">{f.filename}</div>
+                <div className="file-meta">
+                  {f.num_chunks} chunks
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      )}
-    </div>
-  );
+      </div>
+    )}
+  </div>
+);
 }
